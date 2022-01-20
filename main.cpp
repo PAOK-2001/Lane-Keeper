@@ -1,3 +1,4 @@
+// Lane Detector
 #include "laneDetector.cpp"
 #include <bits/stdc++.h>
 #include "opencv2/core.hpp"
@@ -10,7 +11,6 @@ using namespace cv;
 
 int main(){
     laneDetector lanes;
-    // Create OpenCV frame object to store frame information
     Mat frame;
     // Create VideoCapture object
     VideoCapture dashCam("Test Footage/Test2.mp4");
@@ -21,16 +21,19 @@ int main(){
     }
     for (;;){
         dashCam.read(frame);
-        // Check if selected device is sending information
+        // Check if selected source is sending information
         if(frame.empty()){
             cout<<"NULL frame ";
             break;
         }
+        // Load image into lane detector
         lanes.loadFrame(frame);
+        // Find lanes on given frame
         lanes.findLanes();
+        // Overlap lanes on the video
         lanes.display(frame);
         
-        // Run face recognition function
+        // Wait 5 miliseconds
         // Read key board input, setting esc as break key
         if(waitKey(5)== 27){
             break;
