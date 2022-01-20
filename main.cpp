@@ -13,7 +13,11 @@ int main(){
     laneDetector lanes;
     Mat frame;
     // Create VideoCapture object
-    VideoCapture dashCam("Test Footage/Test1.mp4");
+    int test;
+    cout<<"Choose number of test footage to use\n";
+    cin>>test;
+    string path = "Test_Footage/Test"+to_string(test)+".mp4";
+    VideoCapture dashCam(path);
     // Check if the dashCam is readable
     if(!dashCam.isOpened()){
         cout<<"Error reading dashCam feed\n";
