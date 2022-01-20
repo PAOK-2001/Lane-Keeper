@@ -147,7 +147,6 @@ void laneDetector::findCenter(){
     float y = (rightLine[3]);
     center = Point(x,y);
     circle(lineImg,center,15,Scalar(0,0,255),-1);
-    cout<<center<<endl;
 }
 
 // Displays detected lanes unto a given image
