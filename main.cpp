@@ -30,6 +30,7 @@ int main(){
         lanes.loadFrame(frame);
         // Find lanes on given frame
         lanes.findLanes();
+        // Find center of previously calculated lanes
         lanes.findCenter();
         // Overlap lanes on the video
         lanes.display(frame);
