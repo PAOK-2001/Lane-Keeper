@@ -13,7 +13,7 @@ int main(){
     laneDetector lanes;
     Mat frame;
     // Create VideoCapture object
-    VideoCapture dashCam("Test Footage/Test2.mp4");
+    VideoCapture dashCam("Test Footage/Test1.mp4");
     // Check if the dashCam is readable
     if(!dashCam.isOpened()){
         cout<<"Error reading dashCam feed\n";
@@ -30,6 +30,7 @@ int main(){
         lanes.loadFrame(frame);
         // Find lanes on given frame
         lanes.findLanes();
+        lanes.findCenter();
         // Overlap lanes on the video
         lanes.display(frame);
         

@@ -26,6 +26,7 @@ class laneDetector{
         laneDetector();
         void loadFrame(Mat cameraFrame);
         void findLanes();
+        void findCenter();
         void display(Mat cameraFrame);
 };
 
@@ -140,12 +141,23 @@ void laneDetector::findLanes(){
     line(lineImg,Point(rightLine[0],rightLine[1]),Point(rightLine[2],rightLine[3]),Scalar(0,255,0),15);
 }
 
+//Find center given the two lanes.
+void laneDetector::findCenter(){
+    float x = leftLine[0]+((rightLine[0]-leftLine[0])/2.0);
+    float y = (rightLine[3]);
+    center = Point(x,y);
+    circle(lineImg,center,15,Scalar(0,0,255),-1);
+    cout<<center<<endl;
+}
+
 // Displays detected lanes unto a given image
 // @param frame to draw lanes unto.
 void laneDetector::display(Mat cameraFrame){
     // Blend the lineImg of detected frame with camera feed for live visualization
     addWeighted(cameraFrame,1,lineImg,0.4,0,cameraFrame);
-    imshow("Average lanes", cameraFrame);
+    namedWindow("Lane Detector");
+    imshow("Lane Detector", cameraFrame);
+    
 }
 
 #endif
