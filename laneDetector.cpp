@@ -143,7 +143,7 @@ void laneDetector::findLanes(){
 
 //Find center given the two lanes.
 void laneDetector::findCenter(){
-    float x = leftLine[0]+((rightLine[0]-leftLine[0])/2.0);
+    float x = leftLine[2]+((rightLine[2]-leftLine[2])/2.0);
     float y = (rightLine[3]);
     center = Point(x,y);
     circle(lineImg,center,15,Scalar(0,0,255),-1);
