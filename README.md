@@ -4,7 +4,7 @@
 The focus of this project was to create a lane detector class for future implementation in lane keep. The approach for detecting the lanes consisted in finding the edges present in the image using gradient difference (Canny); then masking the image to only include the area corresponding to the road, upon which Hough Transform was applied, detecting probable lines in the image. A linear regression was obtained for each line, which allowed the classification into right (positive slope) and left (negative slope) boundaries; finally, the average coefficients  were found for each boundary, which described the average lines that delimited the lane.  
 ## Theory
 ### Hough Transform
-Represents points as lines in Hough space, where the axis represents the values of a linear equation corresponding to a line that goes through that point . In particular, Hough transform uses the polar representation of a line  $/rho =Acos()+Bsin() where the axes are rho and theta.
+Represents points as lines in Hough space, where the axis represents the values of a linear equation corresponding to a line that goes through that point . In particular, Hough transform uses the polar representation of a line      h<sub>&theta;</sub>(x) = &theta;<sub>o</sub> x + &theta;<sub>1</sub>x where the axes are rho and theta.
 For multiple points, Hough Transform detects the area in Hough space with the
 most number of interceptions, returning the most probable values of the linear equation describing the collection of points. In OpenCV this is implemented as HoughLinesP, and returns the cartesian coordinates of the detected line in a vector of 4 integers Vec4i {x1,y1,x2,y1}.
 Canny Edge Detection
