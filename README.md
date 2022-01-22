@@ -91,7 +91,7 @@ The Lane Detector can be used to find lanes in a single image or a video (read f
 ## Demo
 
 ### Light Curve
-![Test1](MarkDown/Test1.gif?raw=true "Test1")
+![Test1](MarkDown/Test2.gif?raw=true "Test1")
 
 ### Regular Curve
-![Test2](MarkDown/Test2.gif?raw=true "Test2")
+![Test2](MarkDown/Test1.gif?raw=true "Test2")
