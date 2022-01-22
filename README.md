@@ -95,6 +95,3 @@ The Lane Detector can be used to find lanes in a single image or a video (read f
 
 ### Regular Curve
 ![Test2](MarkDown/Test2.gif?raw=true "Test2")
-
-### Extreme Curve
-![Test3](MarkDown/Test3.gif?raw=true "Test3")
