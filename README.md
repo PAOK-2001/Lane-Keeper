@@ -42,11 +42,59 @@ Then it uses the Sobel operator to calculate the pixel gradient in all direction
 ### Class Composition
 #### Atributes
 | Atribute | Description |
-| --- | ----------- |
+| --- | ----- |
 | edgeIMG | Pixel matrix that stores the Canny version of the loaded frame.![Canny](MarkDown/edgeIMG.jpg?raw=true "edgeIMG")  |
 | lineIMG | Pixel matrix that stores the drawed lines and center point that will blended with the orignal image in the final display. ![lineIMG](MarkDown/lineIMG.jpg?raw=true "edgeIMG") |
 | leftLine, rightLine | A Vec4i structure that stores the coordinates of the endpoints of the respective lines that delimit the lane. Format: {x1, y1, x2, y2}|
-|center|||
-
+|center|Point object that stores the coordinates for the center of the lanes|
 #### Methods
-## Implementation
+##### Static
+|Method| Description  |
+| --- | ----- |
+|linearFit(Vec4i lineCoordinates)|Takes a vector of 4 integers representing the endpoints of a line and returns the slope and intercept as a pair.|
+|averageCoheficient(vector<float> registeredCoheficients)|Takes a vector of coheficients and returns the average value.|
+|makeCoordinate(float slope, float intercept, int imgHeight)|Takes the coheficients of a linear equation and the height of the image and calcultates the coordinates of a a line.|
+##### Non-Static
+|Method| Description  |
+| --- | ----- |
+|void loadFrame(Mat cameraFrame) | Loads the image where the lanes wish to be found. It applies converts it to grayscale, and applies Canny Edge Detection, storing the result in *edgeIMG*.|
+|void findLanes()| It makes mask using polygons to isolate the area where the road is, updating *edgeIMG*. Once the region on interest is obtained Hough Transform is used to detect the lines present; afterwards the **linearFit** method is used to find the slope and intercept for each line. Based on the slope, the lines are categorized into right and left boundaries. Finally, it finds the average lines for each side using **averageCoheficient** and it makes the endpoint coordinates (using **makeCoordinates**) to store them in *rightLine* and *leftLine*. It draws said lines on *lineIMG*|
+|void findCenter()|Finds the center of the lane using the coordinates stored in *rightLine* and *leftLine*. Draws the center as a circle in *lineIMG*|
+|void display(Mat cameraFrame) | Overlays the *lineIMG* on the real fram captured by the camera. |
+
+# Implementaion
+The Lane Detector can be used to find lanes in a single image or a video (read from a file or camera.)
+
+**Still image:**
+
+    laneDetector lanes;
+    frame = imread("imageName");
+    lanes.loadFrame(frame);
+    lanes.findLanes();
+    lanes.findCenter();
+    lanes.display(frame);
+
+**Camera:**
+
+    VideoCapture dashCam(path);
+    for (;;){
+        dashCam.read(frame);
+        lanes.loadFrame(frame);
+        lanes.findLanes();
+        lanes.findCenter();
+        lanes.display(frame);
+        if(waitKey(5)== 27){
+            break;
+        }
+    }
+
+## Demo
+
+### Light Curve
+![Test1](MarkDown/Test1.gif?raw=true "Test1")
+
+### Regular Curve
+![Test2](MarkDown/Test2.gif?raw=true "Test2")
+
+### Extreme Curve
+![Test3](MarkDown/Test3.gif?raw=true "Test3")
